@@ -15,12 +15,11 @@ Universidad del Valle de Guatemala
 
 ---
 
-## Descripción
+Descripción
 
-Este trabajo presenta un sistema que transcribe voz en tiempo real, interpreta la intención del usuario y ejecuta trayectorias articulares seguras en un manipulador. Se integra un analizador sintáctico-semántico con un controlador que aplica validaciones de seguridad (modos relativo/absoluto y límites por junta). Las pruebas en condiciones realistas siguieron ciclos iterativos “hablar–ver–corregir”, mostrando ejecuciones consistentes, tolerancia a ambigüedades leves y mejoras de usabilidad con manejo explícito de fallas.
+Este trabajo de graduación desarrolla e integra un módulo de reconocimiento de voz para el control articular seguro de un manipulador myCobot 280 M5. El sistema convierte en tiempo real enunciados verbales en órdenes ejecutables, combinando: (i) transcripción continua de habla (STT), (ii) un analizador sintáctico-semántico que normaliza el lenguaje, resuelve números/órdenes y detecta modo relativo/absoluto, y (iii) un controlador con programación defensiva que verifica límites por junta antes de ejecutar. Todo se visualiza en una GUI que muestra la transcripción, la intención interpretada y el estado de ejecución, facilitando trazabilidad y depuración.
 
-La arquitectura del sistema se organiza en tres subsistemas: (i) transcripción continua de habla, (ii) interpretación sintáctico-semántica de comandos y (iii) generación de órdenes compatibles con restricciones cinemáticas y de seguridad del robot.
-
+La motivación es simplificar la interacción humano-robot frente a interfaces tradicionales, habilitando un flujo “hablar → ver → corregir” más natural. El sistema se validó experimentalmente en condiciones realistas (ruido ambiente moderado, distintas distancias al micrófono), mostrando ejecuciones consistentes, rechazos seguros ante órdenes fuera de rango y cambio de modo por voz (ABS/REL) con confirmación. Los resultados evidencian la viabilidad del enfoque para control articular basado en voz y sientan la base para ampliar a nuevos acentos/idiomas y añadir confirmaciones auditivas/visuales en futuras iteraciones.
 
 <p align="center">
   <img src="Imagenes/Posiciones de pruebas/Posicion home.jpeg" alt="MyCobot 280 en HOME" width="200"><br>
