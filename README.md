@@ -1,6 +1,6 @@
 <!-- Encabezado institucional -->
 <p align="left">
-  <img src="FotosReadME/Facultad.png" alt="ING | Facultad de Ingeniería" height="64">
+  <img src="FotosReadME/Facultad.png" alt="ING | Facultad de Ingeniería" height="16">
 </p>
 
 ![Logo UVG](FotosReadME/Logo.png)
