@@ -1,11 +1,9 @@
 <!-- Encabezado institucional -->
 <p align="left">
-  <img src="FotosReadME/Facultad.png" alt="ING | Facultad de Ingeniería" height="64">
+  <img src="FotosReadME/Facultad.png" alt="ING | Facultad de Ingeniería" height="64" style="vertical-align:middle; margin-right:12px;">
+  <img src="FotosReadME/Logo.png"     alt="Logo UVG"                        height="64" style="vertical-align:middle;">
 </p>
 
-<p align="left">
-  <img src="FotosReadME/Logo.png" alt="ING | Logo UVG" height="64">
-</p>
 
 # Diseño e implementación de un módulo de reconocimiento de voz para el control de sistemas robóticos
 
