@@ -2,11 +2,6 @@
 
 Este directorio documenta visualmente las pruebas y la evolución de la interfaz del sistema de control por voz para el **myCobot 280 M5**. Las imágenes se organizan en subcarpetas y comparten una **convención de nombres** común para vincular **interfaz**, **simulación** y **pose física** de cada prueba.
 
-
-> Nota: Los nombres aquí listados corresponden a los **títulos de archivo** que se ven en el explorador. En el repositorio aparecerán con su extensión real (`.png`, `.jpg`, etc.).
-
----
-
 ## Propósito de cada carpeta
 
 ### `Posiciones de pruebas/`
