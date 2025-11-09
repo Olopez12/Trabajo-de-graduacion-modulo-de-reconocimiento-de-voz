@@ -108,23 +108,23 @@ python -m venv .venv
 # (Si usas Git Bash)  source .venv/Scripts/activate
 ```
 
-###2) Actualizar pip
+### 2) Actualizar pip
 ```bash
 python -m pip install --upgrade pip
 ```
-###3) Instalar GUI y gráficos
+### 3) Instalar GUI y gráficos
 ```bash
 python -m pip install PySide6 matplotlib
 ```
-###4) Instalar cálculo y robótica
+### 4) Instalar cálculo y robótica
 ```bash
 python -m pip install numpy scipy roboticstoolbox-python spatialmath-python
 ```
-###5) Instalar comunicación con myCobot
+### 5) Instalar comunicación con myCobot
 ```bash
 python -m pip install pymycobot pyserial
 ```
-###6) Instalar voz en tiempo real (STT) y utilidades de texto
+### 6) Instalar voz en tiempo real (STT) y utilidades de texto
 ```bash
 python -m pip install google-cloud-speech google-auth sounddevice unidecode six
 ```
