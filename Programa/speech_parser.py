@@ -1,22 +1,24 @@
 # speech_parser.py
+"""
+Parser de comandos de voz + “loop” de reconocimiento en streaming (Google STT).
 
-# SPEECH_PARSER — PARSER sintáctico
+Este módulo provee:
+- Normalización de texto (minúsculas, sin tildes) y parsing sintáctico-semántico
+  para comandos relativos y absolutos orientados a control articular.
+- Señales semánticas (MODE/HOME/CONFIRM/CANCEL/CONFREQ) extraídas del habla.
+- Envolvente de reconocimiento de audio en tiempo real con `sounddevice` y
+  Google Cloud Speech-to-Text, listo para integrarse en GUI (callbacks).
 
-# DESCRIPCIÓN GENERAL
+Estilo aplicado:
+- Docstrings en formato NumPy (numpydoc), comentarios en línea breves y claros.
+- Lógica intacta; únicamente documentación y notas de mantenimiento.
 
-#    • mode="relative" → ("REL", joint:int, delta_deg:float)
-#    • mode="absolute" → ("ABS", joint:int, pos_index:int)  con pos ∈ [1..20]
-# - Usa expresiones regulares para la estructura (sintaxis) y reglas semánticas
-#   ligeras para inferir el signo según el VERBO cuando no hay “+ / - / más / menos”.
-# - Normaliza texto (minúsculas, sin tildes; fallback si falta unidecode),
-#   soporta ordinales/cardinales (“segunda”, “tres”) y sinónimos/abreviaturas:
-#   “junta/eslabón/articulación/conexión/link/posición” y “j”, “j#”.
-
-# - Patrones RELATIVOS (p1–p4) cubren variantes como:
-#     “mueve la junta 3 a 15 grados”, “j3 10”, “gira +20 en la 2”, etc.
-# - Patrones ABSOLUTOS (pA–pC) cubren:
-#     “junta 2 a posición 7”, “j#2 pos 5”, “posición 3 de la junta segunda”.
-
+Referencias de estilo:
+- Google Python Style Guide — google/styleguide
+- numpydoc — numpy/numpydoc
+- pandas docstring guide — pandas-dev/pandas
+- pydocstyle (PEP 257) — PyCQA/pydocstyle
+"""
 
 from __future__ import annotations
 import time, queue, re, unidecode
@@ -28,22 +30,27 @@ from google.oauth2 import service_account
 
 # ---------- Configuración y datos --------------------------
 MAX_JOINT = 6
-#---------------- Normalización------------------------------
+
+# ---------------- Normalización ----------------------------
+# Preferimos `unidecode` (más robusto); si no está disponible, caemos a `unicodedata`.
 try:
     import unidecode as _ud
     def _norm(s: str) -> str:
+        """Normaliza texto a ASCII sin tildes, en minúsculas y sin espacios extremos."""
         return _ud.unidecode(s).lower().strip()
 except Exception:
     import unicodedata
     def _norm(s: str) -> str:
+        """Fallback de normalización con `unicodedata` si no hay `unidecode`."""
         s = unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode("ascii")
         return s.lower().strip()
 
-# Verbos con semántica de signo cuando NO hay + / - / más / menos explícitos
+# Verbos que inducen signo negativo si no hay signo explícito (+/-/más/menos)
 VERBS_NEG = {"decrementa","baja","restale","quita","reduce","disminuye"}
+# Conjunto de verbos aceptados para detección de comandos
 VERBS_ALL = r"(?:mueve|mover|gira|girar|rota|rotar|ajusta|ajustar|desplaza|desplazar|pon|coloca|lleva|incrementa|decrementa|sumale|restale|sube|baja)"
 
-# Diccionarios de números
+# Diccionarios de números (ordinales y cardinales en español)
 ORDINALS = {
     "primer":1,"primero":1,"primera":1,
     "segundo":2,"segunda":2,
@@ -62,21 +69,50 @@ CARDINALS = {
 }
 
 def _word_to_int(token: str):
+    """Convierte un token numérico/ordinal/cardinal en entero; `None` si no aplica."""
     if token.isdigit():
         return int(token)
     return ORDINALS.get(token) or CARDINALS.get(token)
 
+
 def parse_commands(text: str, mode: str = "relative"):
     """
-    Si mode == 'relative' → [("REL", joint:int, delta_deg:float), ...]
-    Si mode == 'absolute' → [("ABS", joint:int, target_deg:float), ...]  (ángulo absoluto)
-    Además, siempre puede devolver intenciones:
-    ("MODE", "absolute"|"relative"), ("HOME",), ("CONFIRM",), ("CANCEL",),
-    ("CONFREQ", True|False)
+    Interpreta un texto y devuelve una lista de acciones semánticas.
+
+    Si `mode == "relative"`:
+        → [("REL", joint:int, delta_deg:float), ...]
+    Si `mode == "absolute"`:
+        → [("ABS", joint:int, target_deg:float), ...]  # ángulo absoluto en grados
+
+    Además, siempre puede devolver intenciones globales:
+        ("MODE", "absolute"|"relative"),
+        ("HOME",),
+        ("CONFIRM",),
+        ("CANCEL",),
+        ("CONFREQ", True|False)
+
+    Parameters
+    ----------
+    text : str
+        Texto reconocido (posiblemente con puntuación/ruido).
+    mode : {"relative","absolute"}, default="relative"
+        Modo activo que guía el tipo de parse.
+
+    Returns
+    -------
+    list
+        Secuencia de tokens semánticos listos para el controlador.
+
+    Notas
+    -----
+    - El parser usa expresiones regulares para estructura + reglas semánticas
+      ligeras (p. ej., deduce signo a partir del verbo si no hay “+/-/más/menos”).
+    - Normaliza el texto a minúsculas y sin tildes para robustez.
     """
     if not text:
         return []
 
+    # Normalización básica y limpieza de caracteres frecuentes
     s = _norm(text)
     s = s.replace("º", " grados").replace("°", " grados")
     s = re.sub(r"[,;]", " ", s)
@@ -84,7 +120,7 @@ def parse_commands(text: str, mode: str = "relative"):
     out = []
 
     # ---------- Intenciones globales (independientes del modo) ----------
-    # MODO
+    # Cambiar modo
     m1 = re.search(r"\bmodo\s+(absoluto|relativo)\b", s)
     m2 = re.search(r"\b(?:cambia(?:r)?|pon(?:er)?|usa(?:r)?)\s+(?:a\s+)?(absoluto|relativo)\b", s)
     if m1 or m2:
@@ -96,13 +132,13 @@ def parse_commands(text: str, mode: str = "relative"):
         or re.search(r"\bposicion\s+inicial\b", s):
             out.append(("HOME",))
 
-    # CONFIRMAR / CANCELAR (por voz)
+    # Confirmar / Cancelar por voz
     if re.search(r"\b(?:confirm\w*|acept\w*|ejecut\w*|proced\w*|adelante|dale)\b", s):
         out.append(("CONFIRM",))
     if re.search(r"\b(?:cancel\w*|anul\w*|rechaz\w*|mejor\s+no|det[eé]n|para|stop)\b", s):
         out.append(("CANCEL",))
 
-    # (Opcional) activar/desactivar confirmación por voz
+    # Activar / desactivar confirmación por voz
     mc_on  = re.search(r"\b(?:activar|habilitar)\s+confirmaci[oó]n\b", s)
     mc_off = re.search(r"\b(?:desactivar|deshabilitar|quitar)\s+confirmaci[oó]n\b", s)
     if mc_on:
@@ -124,6 +160,7 @@ def parse_commands(text: str, mode: str = "relative"):
         ANG  = r"(?P<ang>\d+(?:[.,]\d*)?)"
         DEG  = r"(?:\s*grados?)?"
 
+        # Variantes: “junta 2 ... +15 grados”, “j#2 10”, “+20 grados ... junta segunda”
         pA = re.compile(
             rf"(?:(?P<verb>{VERB})\s+)?(?:{ART}\s+)?{SYN}\s+{NUMJ}\s*{CONN}"
             rf"(?:{ART}\s+)?(?:pos(?:icion)?)?\s*{SIGN}\s*{ANG}{DEG}"
@@ -161,11 +198,12 @@ def parse_commands(text: str, mode: str = "relative"):
             out.append(("ABS", joint, angle))
         return out
 
-    # ---------- RELATIVO (como ya lo tenías) ----------
+    # ---------- RELATIVO ----------
     SIGN = r"(?P<sign>[+\-]|mas|menos|positivo|negativo)?"
     ANG  = r"(?P<ang>\d+(?:[.,]\d*)?)"
     DEG  = r"(?:\s*grados?)?"
 
+    # Variantes: “mueve la junta 3 +15”, “j3 10”, “gira -20 en la 2”, etc.
     p1 = re.compile(rf"(?:(?P<verb>{VERB})\s+)?(?:{ART}\s+)?{SYN}\s+{NUMJ}\s*{CONN}{SIGN}\s*{ANG}{DEG}")
     p2 = re.compile(rf"(?:(?P<verb>{VERB})\s+)?{NUMJ}\s+(?:{ART}\s+)?{SYN}\s*{CONN}{SIGN}\s*{ANG}{DEG}")
     p3 = re.compile(rf"(?:(?P<verb>{VERB})\s+)?\bj\s*#?\s*{NUMJ}\s*{SIGN}\s*{ANG}{DEG}")
@@ -182,33 +220,41 @@ def parse_commands(text: str, mode: str = "relative"):
         joint = _word_to_int(raw_joint)
         if joint is None or not (1 <= joint <= MAX_JOINT):
             continue
+
         ang_str = (m.group("ang") or "0").replace(",", ".")
         try:
             angle = float(ang_str)
         except ValueError:
             continue
+
         sign = (m.group("sign") or "").strip()
         verb = (m.group("verb") or "").strip()
+
+        # Signo por prioridad: explícito (+/-/más/menos) > verbo semántico > positivo
         if sign in {"-","menos","negativo"}:
             angle = -abs(angle)
         elif sign in {"+","mas","positivo"}:
             angle = abs(angle)
         else:
             angle = -abs(angle) if verb in VERBS_NEG else abs(angle)
+
         results.append(("REL", joint, angle))
 
     return out + results
 
 
-
 # ---------- Google STT ---------------------------------------------------------------------------
-KEYFILE = "D:\Programa\STT_demo.json"                 # Cambia la ruta si es necesario
+# ADVERTENCIA: `KEYFILE` contiene ruta local a credenciales. Manténlo fuera del repo público
+# o usa variables de entorno / secret managers. No cambiar la lógica aquí (solo documentación).
+KEYFILE = "D:\\Programa\\STT_demo.json"  # Cambia la ruta si es necesario (doble backslash en Windows)
 creds   = service_account.Credentials.from_service_account_file(KEYFILE)
 client  = speech.SpeechClient(credentials=creds)
 
+# Parámetros de audio (16 kHz mono, bloques de 100 ms)
 RATE  = 16000
 CHUNK = int(RATE / 10)
 
+# Configuración de reconocimiento (es-ES con puntuación automática)
 recognition_config = speech.RecognitionConfig(
     encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
     sample_rate_hertz=RATE,
@@ -220,9 +266,11 @@ streaming_config = speech.StreamingRecognitionConfig(
     interim_results=True
 )
 
+# Cola de audio crudo PCM para alimentar a la API de streaming
 audio_q: six_queue.Queue[bytes] = queue.Queue()
 
 def _sd_callback(indata, frames, time_info, status):
+    """Callback de `sounddevice`: encola audio PCM en `audio_q`."""
     if status:
         print(f"[SD status] {status}", flush=True)
     # Convierte el buffer CFFI a bytes de forma segura
@@ -231,14 +279,38 @@ def _sd_callback(indata, frames, time_info, status):
 
 
 def _audio_generator():
+    """Generador infinito de `StreamingRecognizeRequest` desde `audio_q`."""
     while True:
         chunk = audio_q.get()
         if chunk is None:
             return
         yield speech.StreamingRecognizeRequest(audio_content=chunk)
 
+
 # ---------- Clase de alto nivel para usar en GUI -------------------------------------------------
 class StreamingRecognizer:
+    """Envolvente de reconocimiento en streaming con callbacks Qt-safe.
+
+    Parameters
+    ----------
+    on_live : Callable[[str], None]
+        Callback para texto parcial (interino).
+    on_final : Callable[[str], None]
+        Callback para texto final de cada resultado.
+    on_action : Callable[[list], None]
+        Callback para lista de acciones semánticas (tokens) parseadas.
+    on_error : Callable[[Exception], None]
+        Callback para notificar errores del bucle de reconocimiento.
+    mode_provider : Callable[[], str], default=lambda: "relative"
+        Función que devuelve el modo actual ("relative"|"absolute") para el parser.
+
+    Notas
+    -----
+    - `start()` lanza un hilo `daemon` que abre la entrada de audio y consume
+      la API `streaming_recognize`. `stop()` corta el bucle de forma segura.
+    - El parser `parse_commands` se invoca para resultados finales (`is_final`).
+    """
+
     def __init__(self, *, on_live, on_final, on_action, on_error, mode_provider=lambda: "relative"):
         self._on_live   = on_live
         self._on_final  = on_final
@@ -249,10 +321,12 @@ class StreamingRecognizer:
 
     # ---- Hilo principal ------------------------------------------------------------------------
     def _loop(self):
+        """Bucle de reconocimiento: audio → Google STT → callbacks (LIVE/FIN/ACCIONES)."""
         from threading import current_thread
         print(f"[Reconocedor] Iniciado en {current_thread().name}")
         while self._running:
             try:
+                # Captura de audio crudo (PCM 16-bit mono)
                 with sd.RawInputStream(samplerate=RATE, blocksize=CHUNK, dtype="int16",
                     channels=1, callback=_sd_callback):
                     requests  = _audio_generator()
@@ -265,19 +339,23 @@ class StreamingRecognizer:
                         result = resp.results[0]
                         txt = result.alternatives[0].transcript.strip()
                         if result.is_final:
+                            # Texto final → notificar, parsear y emitir acciones
                             self._on_final(txt)
                             mode = self._mode_provider()  # "relative" | "absolute"
                             acts = parse_commands(txt, mode=mode)
                             self._on_action(acts if acts else [])
                         else:
+                            # Texto interino/LIVE
                             self._on_live(txt)
             except Exception as e:
+                # Reintento simple con backoff mínimo
                 self._on_error(e)
-                time.sleep(1)  # reintento simple
+                time.sleep(1)
         print("[Reconocedor] Detenido")
 
     # --------------------------------------------------------------------------------------------
     def start(self):
+        """Arranca el hilo de reconocimiento si no está corriendo."""
         if self._running:
             return
         self._running = True
@@ -286,6 +364,7 @@ class StreamingRecognizer:
         self._thr.start()
 
     def stop(self):
+        """Detiene el reconocimiento y desbloquea generadores/bloqueos."""
         if not self._running:
             return
         self._running = False
