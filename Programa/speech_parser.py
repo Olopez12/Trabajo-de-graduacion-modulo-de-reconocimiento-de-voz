@@ -370,3 +370,4 @@ class StreamingRecognizer:
         self._running = False
         audio_q.put(None)   # desbloquea generador
         self._thr.join(timeout=2)
+    
