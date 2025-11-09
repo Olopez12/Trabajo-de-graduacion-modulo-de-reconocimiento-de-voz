@@ -29,11 +29,10 @@ Casos en **modo relativo** (el valor es incremento/decremento):
 
 ## Notas Generales
 - **Autor:** Oscar Fernando López Godínez  
-- **Proyecto:** Módulo de reconocimiento de voz para control de robot myCobot 280 M5  
+- **Proyecto:** Módulo de reconocimiento de voz para control de sistemas robóticos 
 - **Institución:** Universidad del Valle de Guatemala (UVG)  
 - **Año:** 2025  
 - **Propósito de las imágenes:** Evidenciar pruebas del parser (modo relativo/absoluto), cambios de modo por voz, poses físicas y evolución de interfaces.  
 - **Hardware:** myCobot 280 M5, PC con Windows  
-- **Software relacionado:** PySide6 (GUI), Robotics Toolbox for Python, Google Cloud Speech-to-Text  
-- **Licencia de medios:** Uso académico (especificar si CC-BY/CC-BY-NC u otra)  
-- **Contacto:** oscar.lopez (coloca tu correo)  
+- **Software relacionado:** PySide6 (GUI), Robotics Toolbox for Python, Google Cloud Speech-to-Text    
+- **Contacto:** oslogod03@gmail.com  
