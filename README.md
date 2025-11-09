@@ -83,12 +83,13 @@ El sistema **transcribe voz en tiempo real**, **interpreta la intención del usu
 ---
 
 
-## 1) Requisitos previos
+##  Requisitos previos
 - **Python 3.10–3.12** (64-bit).
 - **Windows** con puerto USB/COM para el myCobot.
 - **Micrófono USB** funcional.
 - **Credenciales de Google Cloud STT** (archivo JSON de servicio).
 
+---
   
 ## Guía de Instalación Paso a Paso
 
