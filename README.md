@@ -144,6 +144,15 @@ Para las pruebas y demostraciones se empleó el **myCobot 280 M5**, un brazo rob
 
 > En este proyecto, el myCobot 280 M5 actuó como plataforma de validación para comandos de voz en **modo relativo y absoluto**, con límites por junta y retorno de estado integrados a la GUI.
 
+Puedes encontrar más detalles y documentación oficial en **[Elephant Robotics](https://www.elephantrobotics.com/en/support-280-m5-en/)**.
+
+<p align="center">
+  <img src="FotosReadME/mycobot-280-m5.jpeg" alt="myCobot 280 M5" width="640">
+</p>
+
+**Fuente:** [myCobot 280 M5 — Elephant Robotics](https://www.elephantrobotics.com/en/support-280-m5-en/)
+
+
 
 
 
