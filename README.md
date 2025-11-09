@@ -129,6 +129,22 @@ python -m pip install pymycobot pyserial
 python -m pip install google-cloud-speech google-auth sounddevice unidecode six
 ```
 
+---
+
+## Sistema Robótico Utilizado
+
+Para las pruebas y demostraciones se empleó el **myCobot 280 M5**, un brazo robótico de sobremesa de **seis grados de libertad** orientado a docencia y prototipado rápido. Su tamaño y ecosistema lo hacen ideal para iterar en laboratorio sin logística complicada.
+
+- **Formato compacto.** Ocupa poco espacio y se traslada sin esfuerzo; perfecto para mesas de trabajo y aulas.
+- **Control M5Stack.** Basado en la plataforma M5, lo que facilita encendido rápido, telemetría básica y personalización.
+- **6 DOF reales.** La cadena cinemática permite posicionar y orientar el efector con buena flexibilidad para tareas de prueba.
+- **Integración sencilla desde Python.** Soporta bibliotecas como **`pymycobot`** para enviar/leer ángulos y manejar estados sin drivers exóticos.
+- **Montaje y puesta en marcha rápidos.** Conexión por USB/serial y alimentación estándar; en minutos está listo para ejecutar rutinas.
+- **Uso típicamente académico.** Adecuado para ejercicios de control, cinemática y HMI/voz, donde la seguridad y la repetibilidad pesan más que la carga útil.
+
+> En este proyecto, el myCobot 280 M5 actuó como plataforma de validación para comandos de voz en **modo relativo y absoluto**, con límites por junta y retorno de estado integrados a la GUI.
+
+
 
 
 
