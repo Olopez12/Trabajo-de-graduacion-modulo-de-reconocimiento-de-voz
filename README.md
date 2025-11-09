@@ -92,8 +92,6 @@ Este proyecto usa Python para: (i) transcribir voz, (ii) interpretar comandos y 
 - **Micrófono USB** funcional.
 - **Credenciales de Google Cloud STT** (archivo JSON de servicio).
 
-> Si vas a subir muchas imágenes, considera **Git LFS**.
-
 ---
 
 ### 2) Crear entorno virtual
