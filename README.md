@@ -73,9 +73,9 @@ El sistema **transcribe voz en tiempo real**, **interpreta la intención del usu
 ## Tecnologías y Librerías Utilizadas
 
 - **Python:** Lenguaje principal para todo el proyecto (parser, GUI y controlador).
-- **PySide6 (Qt for Python):** Construcción de la interfaz gráfica (ventanas, botones, señales/slots).
+- **PySide6 (Qt for Python):** Construcción de la interfaz gráfica (ventanas, botones, señales).
 - **Matplotlib (QtAgg):** Gráficos embebidos y vista 3D del brazo dentro de la GUI.
-- **NumPy:** Cálculo numérico y manejo de ángulos/transformaciones.
-- **Robotics Toolbox for Python (rtb) + SpatialMath:** Modelo DH del robot y cinemática directa/inversa (SE3, trayectorias).
+- **NumPy:** Cálculo numérico y manejo de ángulos y transformaciones.
+- **Robotics Toolbox for Python (rtb) + SpatialMath:** Modelo DH del robot y cinemática directa e inversa.
 - **PyMyCobot:** Comunicación con el **myCobot 280 M5** (envío de ángulos, lectura de estado, LEDs).
 - **Google Cloud Speech-to-Text:** Transcripción de voz en streaming (hipótesis parciales y finales).
