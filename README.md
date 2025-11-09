@@ -1,2 +1,6 @@
-# Trabajo de graduacion modulo de reconocimiento de voz
-“Módulo de reconocimiento de voz para control articular del MyCobot 280 con Python”
+<!-- Encabezado institucional -->
+<p align="left">
+  <img src="D:\FotosReadME\Facultad.png" alt="ING | Facultad de Ingeniería" height="64">
+</p>
+
+![Logo UVG](D:\FotosReadME\Logo.png)
