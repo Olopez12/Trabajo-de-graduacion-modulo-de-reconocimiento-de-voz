@@ -68,4 +68,14 @@ El sistema **transcribe voz en tiempo real**, **interpreta la intención del usu
   - **Relativo:** “Mueve la junta 2 más 50°” (ajusta respecto a la posición actual).
 - **Pruebas en condiciones reales.** Funciona con ruido moderado y distintas distancias al micrófono.
 
+---
 
+## Tecnologías y Librerías Utilizadas
+
+- **Python:** Lenguaje principal para todo el proyecto (parser, GUI y controlador).
+- **PySide6 (Qt for Python):** Construcción de la interfaz gráfica (ventanas, botones, señales/slots).
+- **Matplotlib (QtAgg):** Gráficos embebidos y vista 3D del brazo dentro de la GUI.
+- **NumPy:** Cálculo numérico y manejo de ángulos/transformaciones.
+- **Robotics Toolbox for Python (rtb) + SpatialMath:** Modelo DH del robot y cinemática directa/inversa (SE3, trayectorias).
+- **PyMyCobot:** Comunicación con el **myCobot 280 M5** (envío de ángulos, lectura de estado, LEDs).
+- **Google Cloud Speech-to-Text:** Transcripción de voz en streaming (hipótesis parciales y finales).
