@@ -26,3 +26,14 @@ Casos en **modo relativo** (el valor es incremento/decremento):
 - `Prueba reinicio de posicion usando el boton`: retorno a HOME con botón.
 - `Prueba reinicio de posicion usando el habla`: retorno a HOME por voz.
 - `Prueba sencilla`, `Prueba sencilla 2/3/4`: incrementos/decrementos sobre juntas.
+
+## Notas Generales
+- **Autor:** Oscar Fernando López Godínez  
+- **Proyecto:** Módulo de reconocimiento de voz para control de robot myCobot 280 M5  
+- **Institución:** Universidad del Valle de Guatemala (UVG)  
+- **Año:** 2025  
+- **Propósito de las imágenes:** Evidenciar pruebas del parser (modo relativo/absoluto), cambios de modo por voz, poses físicas y evolución de interfaces.  
+- **Hardware:** myCobot 280 M5, PC con Windows  
+- **Software relacionado:** PySide6 (GUI), Robotics Toolbox for Python, Google Cloud Speech-to-Text  
+- **Licencia de medios:** Uso académico (especificar si CC-BY/CC-BY-NC u otra)  
+- **Contacto:** oscar.lopez (coloca tu correo)  
