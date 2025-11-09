@@ -1,13 +1,13 @@
 {
-  "type": "service_account",
+  "type": "CUENTA",
   "project_id": "CODIGO DE USUARIO",
   "private_key_id": "KEY DE USUARIO",
   "private_key": "-----BEGIN PRIVATE KEY-----",
-  "client_email": "speechtt@speechtt-458717.iam.gserviceaccount.com",
+  "client_email": "EMAIL",
   "client_id": "CLIENTE ID DE USUARIO",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/speechtt%40speechtt-458717.iam.gserviceaccount.com",
-  "universe_domain": "googleapis.com"
+  "auth_uri": "PRIVADO",
+  "token_uri": "PRIVADO",
+  "auth_provider_x509_cert_url": "PRIVADO",
+  "client_x509_cert_url": "PRIVADO",
+  "universe_domain": "PRIVADO"
 }
