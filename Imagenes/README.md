@@ -2,90 +2,47 @@
 
 Este directorio documenta visualmente las pruebas y la evolución de la interfaz del sistema de control por voz para el **myCobot 280 M5**. Las imágenes se organizan en subcarpetas y comparten una **convención de nombres** común para vincular **interfaz**, **simulación** y **pose física** de cada prueba.
 
----
 
-## Estructura de carpetas
-
-Las imágenes ligadas entre sí comparten el **mismo índice**:
-
-| Prefijo | Carpeta      | Significado                                        | Ejemplo de archivo |
-|:------:|---------------|----------------------------------------------------|--------------------|
-| **I#** | `interfaz/`   | Prueba en la interfaz (GUI)                        | `I1.png`           |
-| **S#** | `simulacion/` | Simulación/planeación de la misma prueba           | `S1.png`           |
-| **F#** | `fisico/`     | Pose física lograda por el myCobot (mundo real)    | `F1.jpg`           |
-
-- El **número** `#` es el vínculo entre las tres imágenes.  
-  Por ejemplo: `I7` ↔ `S7` ↔ `F7` representan **la misma prueba**.
-
-### Ejemplos
-- **Prueba 1**:  
-  - Interfaz: `interfaz/I1.png`  
-  - Simulación: `simulacion/S1.png`  
-  - Físico: `fisico/F1.jpg`
-- **Prueba 12**:  
-  - Interfaz: `interfaz/I12.png`  
-  - Simulación: `simulacion/S12.png`  
-  - Físico: `fisico/F12.jpg`
+> Nota: Los nombres aquí listados corresponden a los **títulos de archivo** que se ven en el explorador. En el repositorio aparecerán con su extensión real (`.png`, `.jpg`, etc.).
 
 ---
 
-## Modos y comandos por voz
+## Propósito de cada carpeta
 
-En `modos/` se documentan cambios de **modo verbal**:
+### `Posiciones de pruebas/`
+Fotos del robot **en el mundo real**:
+- `Posicion de prueba 1`, `Posicion de prueba 2`: poses alcanzadas durante pruebas.
+- `Posicion home`: referencia de **HOME** del sistema.
 
-- **ABS** (absoluto): el ángulo objetivo se interpreta como posición final de la junta.  
-- **REL** (relativo): el valor se interpreta como incremento/decremento sobre la posición actual.
+### `Pruebas de parser/Interfaces/`
+Evolución de la **interfaz de usuario**:
+- `Interfaz de usuario prueba` → versión temprana.
+- `Interfaz para pruebas` → layout intermedio para testeo.
+- `Interfaz de usuario final` → versión consolidada para demostraciones.
 
-**Sugerencia de nombres**:
-- `modos/ABS_on_01.png`, `modos/REL_on_01.png`  
-- `modos/cambio_REL_a_ABS_02.png`  
-- `modos/confirmacion_voz_03.png`, `modos/cancelacion_voz_03.png`
+### `Pruebas de parser/Modo absoluto/`
+Casos donde el parser está en **modo absoluto** (el valor es el ángulo destino):
+- `Prueba cambio de modo`: evidencia del cambio verbal de REL→ABS (o viceversa).
+- `Prueba comando home`: uso del comando *home* por voz.
+- `Prueba sencilla`, `Prueba sencilla 2`: pruebas unitarias de órdenes ABS.
 
-Incluye subtítulos breves en el commit para clarificar el contexto del cambio (p. ej., “Cambio a ABS tras ‘modo absoluto’”).
-
----
-
-## Sistema Junto
-
-La carpeta `sistema_junto/` agrupa imágenes del **sistema completo en funcionamiento** (todas las juntas y elementos integrados). Útil para mostrar:
-- Vista general del **pipeline** (voz → parser → controlador → robot).
-- Secuencias de operación (inicio, confirmación, ejecución, home).
-- Demostraciones para presentaciones o documentación técnica.
-
-**Sugerencia de nombres**:
-- `sistema_junto/overview_01.jpg`
-- `sistema_junto/ejecucion_comando_02.jpg`
-- `sistema_junto/home_sequence_03.jpg`
+### `Pruebas de parser/Modo relativo/`
+Casos en **modo relativo** (el valor es incremento/decremento):
+- `Prueba reinicio de posicion usando el boton`: retorno a HOME con botón.
+- `Prueba reinicio de posicion usando el habla`: retorno a HOME por voz.
+- `Prueba sencilla`, `Prueba sencilla 2/3/4`: incrementos/decrementos sobre juntas.
 
 ---
 
-## Versiones de la interfaz
+## Convenciones de referencia (sin renombrar archivos)
 
-Si tu GUI evolucionó en el tiempo (v1, v2, v3), puedes documentarlo así:
+Para enlazar una **prueba completa** en tu documentación principal (README del repo o informe), usa esta plantilla y ajusta las rutas según la extensión:
 
-- `interfaz/v1/I3.png`  — Primera versión (botones básicos).
-- `interfaz/v2/I3.png`  — Ajustes visuales y estados.
-- `interfaz/v3/I3.png`  — Vista final con 3D/etiquetas.
-
-> Mantén el mismo índice `I#` para **la misma prueba**, y usa subcarpetas por versión para reflejar la evolución sin perder la vinculación `S#/F#`.
-
----
-
-## Recomendaciones de captura
-
-- **Resolución**: preferible 1280×720 o 1920×1080 para lectura clara en informes.  
-- **Formato**: PNG para capturas de pantalla (sin artefactos); JPG para fotos reales.  
-- **Fondo y contraste**: evita fondos con mucho ruido; usa zoom adecuado en la GUI.  
-- **Nomenclatura consistente**: no mezcles `I-1.png`, `i1.PNG`, etc.; usa el estándar `I#`.
-
----
-
-## Cómo agregar nuevas imágenes (paso a paso)
-
-1. Determina el **índice** de la nueva prueba (siguiente número libre).  
-2. Exporta:
-   - GUI → `interfaz/I#.png`
-   - Simulación → `simulacion/S#.png`
-   - Física → `fisico/F#.jpg`
-3. Si el caso muestra cambio de modo o confirmaciones → añade capturas en `modos/`.  
-4. Haz commit con un mensaje descriptivo, por ejemplo:  
+```markdown
+**Prueba relativa (incrementos sobre juntas)**  
+- Interfaz: `Imagenes/Pruebas de parser/Modo relativo/Prueba sencilla 3.png`  
+- Resultado físico relacionado (si aplica): `Imagenes/Posiciones de pruebas/Posicion de prueba 2.jpg`
+**Prueba absoluta con cambio de modo y home por voz**  
+- Cambio de modo: `Imagenes/Pruebas de parser/Modo absoluto/Prueba cambio de modo.png`  
+- Comando home: `Imagenes/Pruebas de parser/Modo absoluto/Prueba comando home.png`  
+- Pose HOME: `Imagenes/Posiciones de pruebas/Posicion home.jpg`
