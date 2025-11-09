@@ -64,8 +64,8 @@ El sistema **transcribe voz en tiempo real**, **interpreta la intención del usu
 - **Seguridad primero.** Antes de moverse, el sistema revisa que cada orden sea segura para el brazo robótico.
 - **Interfaz clara.** La pantalla muestra lo que se dijo, cómo lo entendió el sistema y qué está ejecutando.
 - **Dos formas de moverlo.**
-  - **Absoluto:** “lleva la junta a 30°” (va directo a ese ángulo).
-  - **Relativo:** “sube 10°” (ajusta respecto a la posición actual).
+  - **Absoluto:** “Mueve la junta 4 a la posición 30” (va directo a ese ángulo).
+  - **Relativo:** “Mueve la junta 2 más 50°” (ajusta respecto a la posición actual).
 - **Pruebas en condiciones reales.** Funciona con ruido moderado y distintas distancias al micrófono.
-- **Documentado con imágenes.** Capturas de la interfaz y fotos del robot acompañan cada prueba.
+
 
