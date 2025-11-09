@@ -79,3 +79,28 @@ El sistema **transcribe voz en tiempo real**, **interpreta la intención del usu
 - **Robotics Toolbox for Python (rtb) + SpatialMath:** Modelo DH del robot y cinemática directa e inversa.
 - **PyMyCobot:** Comunicación con el **myCobot 280 M5** (envío de ángulos, lectura de estado, LEDs).
 - **Google Cloud Speech-to-Text:** Transcripción de voz en streaming (hipótesis parciales y finales).
+
+---
+
+## Guía de instalación de librerías
+
+Este proyecto usa Python para: (i) transcribir voz, (ii) interpretar comandos y (iii) controlar un myCobot 280 M5 desde una GUI. Sigue estos pasos para dejar el entorno listo.
+
+### 1) Requisitos previos
+- **Python 3.10–3.12** (64-bit).
+- **Windows** con puerto USB/COM para el myCobot.
+- **Micrófono USB** funcional.
+- **Credenciales de Google Cloud STT** (archivo JSON de servicio).
+
+> Si vas a subir muchas imágenes, considera **Git LFS**.
+
+---
+
+### 2) Crear entorno virtual
+```bash
+# en la carpeta del proyecto
+python -m venv .venv
+# activar (PowerShell)
+. .venv/Scripts/Activate.ps1
+# o en CMD: .venv\Scripts\activate.bat
+# o en Git Bash: source .venv/Scripts/activate
