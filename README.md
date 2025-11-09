@@ -82,23 +82,38 @@ El sistema **transcribe voz en tiempo real**, **interpreta la intención del usu
 
 ---
 
-## Guía de instalación de librerías
 
-Este proyecto usa Python para: (i) transcribir voz, (ii) interpretar comandos y (iii) controlar un myCobot 280 M5 desde una GUI. Sigue estos pasos para dejar el entorno listo.
-
-### 1) Requisitos previos
+## 1) Requisitos previos
 - **Python 3.10–3.12** (64-bit).
 - **Windows** con puerto USB/COM para el myCobot.
 - **Micrófono USB** funcional.
 - **Credenciales de Google Cloud STT** (archivo JSON de servicio).
 
----
+  
+## Guía de Instalación Paso a Paso
 
-### 2) Crear entorno virtual
-```bash
-# en la carpeta del proyecto
+Abre tu terminal (PowerShell o CMD) y ejecuta los siguientes comandos para preparar el entorno y **todas** las librerías usadas por el proyecto.
+
+### 1) Crear y activar entorno virtual (recomendado)
+# En la carpeta del proyecto:
 python -m venv .venv
-# activar (PowerShell)
-. .venv/Scripts/Activate.ps1
-# o en CMD: .venv\Scripts\activate.bat
-# o en Git Bash: source .venv/Scripts/activate
+# PowerShell:
+. .venv\Scripts\Activate.ps1
+# (CMD)    : .venv\Scripts\activate.bat
+# (Git Bash): source .venv/Scripts/activate
+
+### 2) Actualizar pip
+python -m pip install --upgrade pip
+
+### 3) Instalar dependencias del proyecto
+# GUI y visualización embebida
+python -m pip install PySide6 matplotlib
+
+# Cálculo y robótica (cinemática, SE3 y trayectorias)
+python -m pip install numpy scipy roboticstoolbox-python spatialmath-python
+
+# myCobot 280 M5 (comunicación serie)
+python -m pip install pymycobot pyserial
+
+# Voz en tiempo real (STT + audio + normalización de texto)
+python -m pip install google-cloud-speech google-auth sounddevice unidecode six
