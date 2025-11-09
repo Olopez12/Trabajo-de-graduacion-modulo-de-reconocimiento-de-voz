@@ -41,3 +41,49 @@ Diseñar y desarrollar un sistema de reconocimiento de voz capaz de interpretar 
 4. Implementar un módulo de activación por voz que detecte un comando o frase especial para iniciar la comunicación con el sistema robótico y habilitar la recepción de instrucciones.
 5. Diseñar una interfaz gráfica intuitiva que permita visualizar en tiempo real la transcripción y el análisis de los comandos de voz, así como el estado de ejecución del sistema robótico.
 
+---
+
+
+## Enfoque y Metodología
+
+### Enfoque
+El proyecto integra un flujo de **voz → intención → movimiento** para control articular seguro del myCobot 280 M5. Se compone de tres subsistemas principales:
+1. **STT (transcripción en tiempo real):** captura de audio a 16 kHz con puntuación automática para obtener hipótesis parciales [LIVE] y finales [FIN].
+2. **Parser sintáctico–semántico:** normaliza el texto (minúsculas, sin tildes), interpreta números (cardinales/ordinales), signos (“más/menos”) y decide **modo relativo/absoluto**; genera tokens de acción (`REL`, `ABS`, `HOME`, `MODE`, `CONFIRM`, `CANCEL`).
+3. **Controlador y GUI:** valida límites por junta, ejecuta movimientos (unitarios y absolutos) y expone en la interfaz la transcripción, la intención y el estado de ejecución para trazabilidad.
+
+Este enfoque reduce la carga de interfaces tradicionales y habilita un ciclo natural **“hablar → ver → corregir”** con programación defensiva (bloqueos fuera de rango, confirmaciones y manejo explícito de errores).
+
+### Metodología
+
+**1) Diseño y selección tecnológica**
+- Definición de requisitos de latencia, robustez y seguridad.
+- Selección de bibliotecas para STT, parsing y control del robot.
+- Estructuración del proyecto en módulos: `speech_parser.py`, `robot_controller.py`, `Gui_app_Brazo.py`.
+
+**2) Implementación incremental**
+- **STT en streaming:** configuración de audio (16 kHz, mono) y manejo de resultados interinos/finales.
+- **Parser híbrido:** expresiones regulares + reglas semánticas (verbos que inducen signo, manejo de coma decimal, múltiples órdenes por frase).
+- **Controlador del robot:** capa de validación (USER_LIMITS y ventana de tolerancia), envío de setpoints y retrolectura de ángulos.
+- **GUI:** presentación sincronizada de [LIVE]/[FIN], acciones interpretadas y estados (modo, errores, HOME).
+
+**3) Integración y pruebas de sistema**
+- Pruebas funcionales en **modo relativo** (incrementos/decrementos) y **modo absoluto** (destinos por junta).
+- Ensayos de **cambio de modo por voz** y **comando HOME** con confirmación/cancelación.
+- Verificación de la correspondencia **interfaz → simulación → pose física** (con registro fotográfico).
+
+**4) Validación experimental**
+- Entorno con **ruido moderado** y distancias ≤ 1 m al micrófono.
+- Métricas cualitativas: consistencia de ejecución, rechazo seguro de órdenes ambiguas/fuera de rango, recuperación tras errores.
+- Iteraciones sucesivas hasta estabilizar patrones de uso y dictado.
+
+**5) Documentación y trazabilidad**
+- Capturas de interfaz, simulación y robot físico organizadas por pruebas.
+- Registro de configuraciones (audio, puertos, límites por junta) y dependencias.
+- Secciones de README: descripción, objetivos, metodología, resultados, estructura de imágenes y consideraciones de seguridad.
+
+**Herramientas y entorno (resumen)**
+- **Hardware:** myCobot 280 M5, micrófono de condensador USB.
+- **Software:** PySide6, numpy, roboticstoolbox-python, spatialmath, pymycobot, google-cloud-speech, sounddevice.
+- **SO:** Windows (ajustable a otros entornos con configuración equivalente).
+
