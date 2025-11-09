@@ -11,8 +11,8 @@ Fotos del robot **en el mundo real**:
 
 ### `Pruebas de parser/Interfaces/`
 Evolución de la **interfaz de usuario**:
-- `Interfaz de usuario prueba` → versión temprana.
-- `Interfaz para pruebas` → layout intermedio para testeo.
+- `Interfaz de usuario prueba` → versión consolidada para demostraciones (con colores solo de propuesta).
+- `Interfaz para pruebas` → versión temprana para testeo.
 - `Interfaz de usuario final` → versión consolidada para demostraciones.
 
 ### `Pruebas de parser/Modo absoluto/`
