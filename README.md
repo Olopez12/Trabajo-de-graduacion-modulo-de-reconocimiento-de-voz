@@ -7,7 +7,7 @@
 
 # Diseño e implementación de un módulo de reconocimiento de voz para el control de sistemas robóticos
 
-**Fase IV**
+**Fase V**
 
 **Oscar Fernando López Godínez**  
 Departamento de Ingeniería Mecatrónica  
