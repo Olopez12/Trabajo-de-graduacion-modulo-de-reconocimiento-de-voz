@@ -95,13 +95,14 @@ El sistema **transcribe voz en tiempo real**, **interpreta la intención del usu
 
 Abre tu terminal (PowerShell o CMD) y ejecuta los siguientes comandos para preparar el entorno y **todas** las librerías usadas por el proyecto.
 
-### 1) Crear y activar entorno virtual (recomendado)
-# En la carpeta del proyecto:
+### 1)  Crear entorno virtual
+```bash
+# en la carpeta del proyecto
 python -m venv .venv
-# PowerShell:
-. .venv\Scripts\Activate.ps1
-# (CMD)    : .venv\Scripts\activate.bat
-# (Git Bash): source .venv/Scripts/activate
+# activar (PowerShell)
+. .venv/Scripts/Activate.ps1
+# o en CMD: .venv\Scripts\activate.bat
+# o en Git Bash: source .venv/Scripts/activate
 
 ### 2) Actualizar pip
 python -m pip install --upgrade pip
