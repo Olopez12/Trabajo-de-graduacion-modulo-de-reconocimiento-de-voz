@@ -93,73 +93,16 @@ El sistema **transcribe voz en tiempo real**, **interpreta la intención del usu
   
 ## Guía de Instalación Paso a Paso
 
-Abre tu terminal (PowerShell o CMD) y ejecuta los siguientes comandos para preparar el entorno y **todas** las librerías usadas por el proyecto.
+> Abre **PowerShell** o **CMD** dentro de la carpeta del proyecto.
 
-:: ============================================================
-:: INSTALACIÓN PASO A PASO (WINDOWS) — PROYECTO CONTROL POR VOZ
-:: ============================================================
+---
 
-:: 1) CREAR ENTORNO VIRTUAL (en la carpeta del proyecto)
+### 1) Crear y activar entorno virtual
+```bash
+# Crear el entorno virtual
 python -m venv .venv
 
-:: 1.1) ACTIVAR ENTORNO
-:: - PowerShell:
+# Activar en PowerShell
 . .venv\Scripts\Activate.ps1
-:: - CMD:
-:: .venv\Scripts\activate.bat
-:: - Git Bash:
-:: source .venv/Scripts/activate
-
-:: ------------------------------------------------------------
-
-:: 2) ACTUALIZAR PIP
-python -m pip install --upgrade pip
-
-:: ------------------------------------------------------------
-
-:: 3) INSTALAR LIBRERÍAS DE GUI Y GRÁFICOS (Qt + canvas)
-python -m pip install PySide6 matplotlib
-
-:: ------------------------------------------------------------
-
-:: 4) INSTALAR CÁLCULO Y ROBÓTICA (cinemática, SE3, trayectorias)
-python -m pip install numpy scipy roboticstoolbox-python spatialmath-python
-
-:: ------------------------------------------------------------
-
-:: 5) INSTALAR SOPORTE PARA MYCOBOT (comunicación serie)
-python -m pip install pymycobot pyserial
-
-:: ------------------------------------------------------------
-
-:: 6) INSTALAR VOZ EN TIEMPO REAL (STT) Y UTILIDADES DE TEXTO
-python -m pip install google-cloud-speech google-auth sounddevice unidecode six
-:: Nota: si sounddevice pide compiladores, instala "Microsoft C++ Build Tools" y repite.
-
-:: ------------------------------------------------------------
-
-:: 7) CONFIGURAR CREDENCIALES DE GOOGLE STT (ajusta la ruta a tu JSON)
-set GOOGLE_APPLICATION_CREDENTIALS=D:\Programa\STT_demo.json
-:: (Opcional) También puedes editar 'speech_parser.py' -> KEYFILE = "D:\\Programa\\STT_demo.json"
-
-:: ------------------------------------------------------------
-
-:: 8) CONFIGURAR PUERTO DEL ROBOT (editar en robot_controller.py)
-:: PORT = "COM9"   # cámbialo al COM real (COM3, COM7, etc.)
-:: BAUD = 115200
-
-:: ------------------------------------------------------------
-
-:: 9) EJECUTAR LA APLICACIÓN GRÁFICA
-python Gui_app_Brazo.py
-:: Verás en la GUI: [LIVE]/[FIN], acciones (REL/ABS/HOME/MODE/CONFIRM/CANCEL) y el 3D del robot.
-
-:: ------------------------------------------------------------
-
-:: 10) CERRAR / LIMPIAR SESIÓN
-:: - Detener el programa en consola:  Ctrl + C
-:: - Desactivar el entorno virtual:
-deactivate
-:: - Cerrar la terminal:
-:: exit
-
+# (Si usas CMD)    .venv\Scripts\activate.bat
+# (Si usas Git Bash)  source .venv/Scripts/activate
