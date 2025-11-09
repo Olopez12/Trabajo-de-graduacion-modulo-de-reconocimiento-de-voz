@@ -25,7 +25,10 @@ La motivación es simplificar la interacción humano-robot frente a interfaces t
   <img src="Imagenes/Posiciones de pruebas/Posicion home.jpeg" alt="MyCobot 280 en HOME" width="200"><br>
   <em>MyCobot 280 M5 en posición HOME utilizada durante las validaciones.</em>
 </p>
+
 ---
+
+
 ## Objetivos
 
 ### Objetivo general
