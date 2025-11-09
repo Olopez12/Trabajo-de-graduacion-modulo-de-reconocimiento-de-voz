@@ -6,13 +6,6 @@ Este directorio documenta visualmente las pruebas y la evolución de la interfaz
 
 ## Estructura de carpetas
 
-
-> **Sugerencia**: Si usas Git LFS para archivos pesados (PNG/JPG), asegúrate de tener rastreados `*.png` y `*.jpg`.
-
----
-
-## Convención de nombres (vinculación 1–a–1)
-
 Las imágenes ligadas entre sí comparten el **mismo índice**:
 
 | Prefijo | Carpeta      | Significado                                        | Ejemplo de archivo |
