@@ -96,26 +96,3 @@ El sistema **transcribe voz en tiempo real**, **interpreta la intención del usu
 Abre tu terminal (PowerShell o CMD) y ejecuta los siguientes comandos para preparar el entorno y **todas** las librerías usadas por el proyecto.
 
 ### 1)  Crear entorno virtual
-```bash
-# en la carpeta del proyecto
-python -m venv .venv
-# activar (PowerShell)
-. .venv/Scripts/Activate.ps1
-# o en CMD: .venv\Scripts\activate.bat
-# o en Git Bash: source .venv/Scripts/activate
-
-### 2) Actualizar pip
-python -m pip install --upgrade pip
-
-### 3) Instalar dependencias del proyecto
-# GUI y visualización embebida
-python -m pip install PySide6 matplotlib
-
-# Cálculo y robótica (cinemática, SE3 y trayectorias)
-python -m pip install numpy scipy roboticstoolbox-python spatialmath-python
-
-# myCobot 280 M5 (comunicación serie)
-python -m pip install pymycobot pyserial
-
-# Voz en tiempo real (STT + audio + normalización de texto)
-python -m pip install google-cloud-speech google-auth sounddevice unidecode six
