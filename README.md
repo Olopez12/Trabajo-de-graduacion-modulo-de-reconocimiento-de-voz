@@ -21,7 +21,7 @@ Este trabajo presenta un sistema que transcribe voz en tiempo real, interpreta l
 La arquitectura completa del sistema está organizada en tres subsistemas: (i) transcripción continua de habla (STT), (ii) interpretación sintáctico-semántica de comandos y (iii) generación de órdenes compatibles con restricciones cinemáticas y de seguridad del robot. :contentReference[oaicite:2]{index=2}
 
 <p align="center">
-  <img src="Imagenes/Posiciones de pruebas/Posicion home.png" alt="MyCobot 280 en HOME" width="720"><br>
+  <img src="Imagenes/Posiciones de pruebas/Posicion home.jpeg" alt="MyCobot 280 en HOME" width="720"><br>
   <em>MyCobot 280 M5 en posición HOME utilizada durante las validaciones.</em>
 </p>
 
