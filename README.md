@@ -147,7 +147,7 @@ Para las pruebas y demostraciones se empleó el **myCobot 280 M5**, un brazo rob
 Puedes encontrar más detalles y documentación oficial en **[Elephant Robotics](https://www.elephantrobotics.com/en/support-280-m5-en/)**.
 
 <p align="center">
-  <img src="FotosReadME\mycobot-280-m5.jpg" alt="myCobot 280 M5" width="640">
+  <img src="FotosReadME\mycobot-280-m5.jpg" alt="myCobot 280 M5" width="200">
 </p>
 
 **Fuente:** [myCobot 280 M5 — Elephant Robotics](https://www.elephantrobotics.com/en/support-280-m5-en/)
