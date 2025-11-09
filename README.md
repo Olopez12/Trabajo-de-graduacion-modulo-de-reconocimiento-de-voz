@@ -17,11 +17,13 @@ Universidad del Valle de Guatemala
 
 ## Descripción
 
-Este trabajo presenta un sistema que transcribe voz en tiempo real, interpreta la intención del usuario y ejecuta trayectorias articulares seguras en un manipulador, integrando un analizador sintáctico-semántico y un controlador con validaciones de seguridad (modos relativo/absoluto y límites por junta). Las pruebas en condiciones realistas siguieron ciclos iterativos “hablar–ver–corregir”, mostrando ejecuciones consistentes, tolerancia a ambigüedades leves y mejoras de usabilidad con manejo explícito de fallas. :contentReference[oaicite:0]{index=0} :contentReference[oaicite:1]{index=1}  
-La arquitectura completa del sistema está organizada en tres subsistemas: (i) transcripción continua de habla (STT), (ii) interpretación sintáctico-semántica de comandos y (iii) generación de órdenes compatibles con restricciones cinemáticas y de seguridad del robot. :contentReference[oaicite:2]{index=2}
+Este trabajo presenta un sistema que transcribe voz en tiempo real, interpreta la intención del usuario y ejecuta trayectorias articulares seguras en un manipulador. Se integra un analizador sintáctico-semántico con un controlador que aplica validaciones de seguridad (modos relativo/absoluto y límites por junta). Las pruebas en condiciones realistas siguieron ciclos iterativos “hablar–ver–corregir”, mostrando ejecuciones consistentes, tolerancia a ambigüedades leves y mejoras de usabilidad con manejo explícito de fallas.
+
+La arquitectura del sistema se organiza en tres subsistemas: (i) transcripción continua de habla, (ii) interpretación sintáctico-semántica de comandos y (iii) generación de órdenes compatibles con restricciones cinemáticas y de seguridad del robot.
+
 
 <p align="center">
-  <img src="Imagenes/Posiciones de pruebas/Posicion home.jpeg" alt="MyCobot 280 en HOME" width="720"><br>
+  <img src="Imagenes/Posiciones de pruebas/Posicion home.jpeg" alt="MyCobot 280 en HOME" width="200"><br>
   <em>MyCobot 280 M5 en posición HOME utilizada durante las validaciones.</em>
 </p>
 
