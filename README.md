@@ -47,7 +47,7 @@ Diseñar y desarrollar un sistema de reconocimiento de voz capaz de interpretar 
 ## Enfoque y Metodología
 
 ### Enfoque
-El sistema **transcribe voz en tiempo real**, **interpreta la intención del usuario** y **ejecuta trayectorias articulares seguras** en un manipulador. La arquitectura integra un **analizador sintáctico-semántico** y un **controlador con API clara** que **valida comandos relativos y absolutos** frente a **límites por junta** y **estados del sistema**. La **validación experimental**, con **ruido ambiente moderado** y **diferentes distancias al micrófono**, siguió ciclos iterativos **“hablar–ver–corregir”** para consolidar **patrones robustos de control**.
+El sistema **transcribe voz en tiempo real**, **interpreta la intención del usuario** y **ejecuta trayectorias articulares seguras** en un manipulador. La arquitectura integra un **analizador sintáctico-semántico** y un **controlador con API clara** que **valida comandos relativos y absolutos** frente a **límites por junta** y **estados del sistema**. La **validación experimental**, con **ruido ambiente moderado** y **diferentes distancias al micrófono**.
 
 ### Metodología
 1. **Investigación y selección** de bibliotecas de software para la **captura y transcripción de voz**.  
@@ -55,3 +55,17 @@ El sistema **transcribe voz en tiempo real**, **interpreta la intención del usu
 3. Se seleccionó **Python** para el desarrollo de **analizadores sintáctico-semánticos** que **extraen la intención y los parámetros, juntas y ángulos**.  
 4. Posteriormente se estableció el **controlador del manipulador** que **valida cada orden contra límites por junta** y **muestra el estado del sistema**.  
 5. Finalmente se realizó una **interfaz gráfica unificada** que **muestra transcripción, validaciones y estado del robot**, **cerrando el ciclo de retroalimentación usuario-sistema**.
+
+---
+
+## Características del Proyecto
+
+- **Control por voz natural.** El robot entiende instrucciones habladas sencillas y las convierte en movimientos reales.
+- **Seguridad primero.** Antes de moverse, el sistema revisa que cada orden sea segura para el brazo robótico.
+- **Interfaz clara.** La pantalla muestra lo que se dijo, cómo lo entendió el sistema y qué está ejecutando.
+- **Dos formas de moverlo.**
+  - **Absoluto:** “lleva la junta a 30°” (va directo a ese ángulo).
+  - **Relativo:** “sube 10°” (ajusta respecto a la posición actual).
+- **Pruebas en condiciones reales.** Funciona con ruido moderado y distintas distancias al micrófono.
+- **Documentado con imágenes.** Capturas de la interfaz y fotos del robot acompañan cada prueba.
+
