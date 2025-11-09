@@ -152,8 +152,15 @@ Puedes encontrar más detalles y documentación oficial en **[Elephant Robotics]
 
 **Fuente:** [myCobot 280 M5 — Elephant Robotics](https://www.elephantrobotics.com/en/support-280-m5-en/)
 
+---
 
+## Resultados y Conclusiones
 
+- **Reconocimiento continuo y estable.** Las bibliotecas seleccionadas sostuvieron transcripción en tiempo real incluso con **ruido ambiente moderado** y en **sesiones prolongadas**, apta para control del robot.
+- **Interpretación segura de comandos.** El analizador sintáctico-semántico **resolvió correctamente las instrucciones** con pronunciación clara y, ante **ambigüedad leve**, **rechazó** el comando para **preservar la seguridad**.
+- **Ejecución consistente.** Las trayectorias del manipulador **coincidieron con la transcripción mostrada en la GUI** y **se mantuvieron dentro de los límites por junta**; el controlador **bloqueó** destinos fuera de rango y mantuvo **consistencia de ángulos** tras cada acción.
+- **Ciclo “hablar–ver–corregir”.** En pruebas reales, este ciclo permitió **afinar la dicción y las pausas**, logrando que la **respuesta del robot** se alineara con lo transcrito.
+- **Robustez ante variabilidad del habla.** El módulo **respondió adecuadamente** frente a **distintos acentos** y **velocidades del habla**, evidenciando **buena capacidad de interpretación** del analizador.
 
-
+**Conclusión.** El sistema es **viable para control articular seguro** a partir de voz, con **ejecución consistente**, **rechazo de órdenes ambiguas** y una **GUI** que refleja fielmente cada acción; sienta bases para extender cobertura y usabilidad en entornos reales.
 
